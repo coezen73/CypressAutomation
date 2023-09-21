@@ -38,8 +38,8 @@ describe('Find or Get Elements by Using Different Locators' , () => {
       // by id:
     cy.get('#wooden_spoon');
 
-      // If I want to use text--> no xpath bur possible with different approach:
-        //  There is a way of chainning..
+      // If I want to use text--> no xpath, but possible with different approach:
+        //  There is a way of chainning.. Travel through certain('button') element:
     cy.get('button').should('contain', 'Login').click();
 
 
