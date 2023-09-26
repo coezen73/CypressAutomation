@@ -1,21 +1,26 @@
 {
-  "name": "dir",
+  "name": "cypressautomation",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress-cli": "cypress open",
+    "cypress-headed": "cypress run -b chrome",
+    "cypress-headless": "cypress run --headless -b chrome",
+    "eslint": "eslint cypress",
+    "eslint-fix": "eslint cypress --fix"
   },
+
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cypress": "^13.2.0",
-    "prettier": "^3.0.3",
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {
     "eslint": "^8.50.0",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
     "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-import": "^2.28.1",
@@ -23,6 +28,7 @@
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-prettier": "^0.0.0-empty",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "prettier": "^3.0.3"
   }
 }
