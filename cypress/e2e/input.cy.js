@@ -5,19 +5,19 @@ describe('Input Forms in Tests', () => {
     beforeEach('Navigate to Registration Page',() => {
       // runs before each test case
       cy.clearCookies();
-      cy.visit('/gegistration_form')
+      cy.visit('/registration_form')
     });
   
     it('Check different input box fields and verify', () => {
       // fill the form:
       cy.get('input[name="firstname"]').type('Max');
       cy.get('input[name="lastname"]').type('Mustermann');
-      cy.get('input[name="username"]').type('MaxM');
+      cy.get('input[name="username"]').type('Max2001');
 
      /* Math.floor : makes it a whole number  
         Math.random(): creates a number between 0 - 1 ~ 0.005678     */ 
       // Mail:
-     const email = `formtest${Math.floor(100000 + Math.random() * 900000)}@mail.com`;
+     const email = `testmail${Math.floor(100000 + Math.random() * 900000)}@mail.com`;
       cy.get('input[name="email"]').type(email);
       // password:
       const password = `test${Math.floor(100000 + Math.random() * 900000)}`;
