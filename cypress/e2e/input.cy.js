@@ -31,11 +31,18 @@ describe('Input Forms in Tests', () => {
     cy.get('.radio')            // <- Locate all the buttons at once (.radio) from the class,
     .find('[type=radio]')       // <- locate the button itself,
     .then(($myRadio =>{         // <- $myRadio : Jquery element / new function($myRadio),
-
+  // Get all radio buttons, select the first one and verify that it is checked:
     cy.wrap($myRadio).first().check().should('be.checked'); // <- cypress chainable structure  
   /* convert to cypress object(wrap) and get all radio buttons -> and select the first one,
      -> assert if it is checked.-> should()verifies what ever I provide as parameter 
      'be.checked' (cypress func.)  */
+
+  // Get all radio buttons, select the second one and verify that it is checked:
+  cy.wrap($myRadio).eq(1).check().should('be.checked');
+  cy.get('[data-bv-icon-for="gender"]').should('be.visible');
+  // Third radio button is NOT checked:
+  cy.wrap($myRadio).eq(2).should('not.be.checked');
+
     }))                                                
 
   })
