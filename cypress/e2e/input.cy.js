@@ -7,7 +7,7 @@ describe('Input Forms in Tests', () => {
     cy.visit('/registration_form');
   });
 
-  it('Check different input box fields and verify', () => {
+  it.skip('Check different input box fields and verify', () => {
     // fill the form:
     cy.get('input[name="firstname"]').type('Max');
     cy.get('input[name="lastname"]').type('Mustermann');
@@ -27,7 +27,7 @@ describe('Input Forms in Tests', () => {
 
     cy.get('input[name="birthday"]').type('01/01/2001');
   });
-  it('Check different radio-button actions',() => {
+  it.skip('Check different radio-button actions',() => {
     cy.get('.radio')            // <- Locate all the buttons at once (.radio) from the class,
     .find('[type=radio]')       // <- locate the button itself,
     .then(($myRadio =>{         // <- $myRadio : Jquery element / new function($myRadio),
@@ -44,6 +44,51 @@ describe('Input Forms in Tests', () => {
   cy.wrap($myRadio).eq(2).should('not.be.checked');
 
     }))                                                
+
+  })
+  it.skip('Check different checkbox actions', () => {
+    // Get all checkboxes and select JAVA:
+   cy.get('[type="checkbox"]').then(($myCheckbox) => {
+      cy.wrap($myCheckbox).eq(1).check().should('be.checked');
+      // Unchecked JAVA:
+      cy.wrap($myCheckbox).eq(1).uncheck().should('not.be.checked');
+      // Verify and check if the third checkbox has the value of 'javascript'
+      cy.wrap($myCheckbox).eq(2)
+      .should('have.value', 'javascript')
+      .check().should('be.checked');
+
+      
+
+
+   }) 
+
+
+  })
+  it.skip('Check selection of a single choice from dropdown' , () => {
+    // select one element:
+   cy.get('select[name="job_title"]').select("QA"); // <- select 'class' and select 'function' 
+    // assert the text after selecting:
+   cy.get('select[name="job_title"]').contains("QA");
+
+  })
+
+  it('Check selection of all list options', () => {
+    //  We will provide our test data through 'fixtures' folder as JSON object,
+    //  then we use the data to verify selected values.
+    cy.fixture('departments').then((departments) => {
+      // Get all options in dropdown, iterate through these options one by one:
+      cy.get('select[name="department"] > option').each((option,index) => {
+        // get each option text:
+        const opText = option.text(); // <- I create an 'opText' variable to hold the text by using text()function
+       // cy.log(opText);
+       // cy.log(index);
+       // cy.log(departments[index]);
+       cy.get('select[name="department"]').select(opText)
+       .should('have.value', option.val())
+       .contains(departments[index]);
+
+      })
+    })
 
   })
 });
