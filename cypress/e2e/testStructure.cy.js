@@ -11,7 +11,7 @@ describe('Context: My First Tests', () => {
   });
 
   after(() => {
-    // similar to after class in TestN´G, ruuns once after all tests finished
+    // similar to after class in TestN´G, runs once after all tests finished
   });
   afterEach(() => {
     // runs after  each test case, afterMethod in TestNg;
