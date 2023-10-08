@@ -57,11 +57,7 @@ describe('Input Forms in Tests', () => {
       .should('have.value', 'javascript')
       .check().should('be.checked');
 
-      
-
-
    }) 
-
 
   })
   it.skip('Check selection of a single choice from dropdown' , () => {
@@ -71,7 +67,6 @@ describe('Input Forms in Tests', () => {
    cy.get('select[name="job_title"]').contains("QA");
 
   })
-
   it('Check selection of all list options', () => {
     //  We will provide our test data through 'fixtures' folder as JSON object,
     //  then we use the data to verify selected values.

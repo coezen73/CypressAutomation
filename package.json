@@ -10,11 +10,12 @@
     "eslint": "eslint cypress",
     "eslint-fix": "eslint cypress --fix"
   },
-
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cypress": "^13.2.0",
+    "cypress": "^13.3.0",
+    "cypress-file-upload": "^5.0.8",
+    "file-upload": "^0.0.0",
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {
