@@ -14,7 +14,6 @@ Step3- The File that we want to upload, should be in our fixture folder(pic.png)
       cy.clearCookies();
       cy.visit('/upload'); //<- we already defined our base url.(this is the extension)
     });
-  
     it('Check Upload Action', () => {
       // locate choose file button and attach a file:
       cy.get('input#file-upload').attachFile('pic.png');
