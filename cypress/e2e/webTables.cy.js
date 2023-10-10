@@ -28,10 +28,11 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
            */
     cy.get('.rt-tbody') // <- class element (the whole table)
       .contains('.rt-tr-group', 'Alden') // <- parent to child element
-      .then((row) => {  // <- create a row element in Jquery
-        cy.wrap(row)    // <- turn it to a cypress element
+      .then((row) => {
+        // <- create a row element in Jquery
+        cy.wrap(row) // <- turn it to a cypress element
           .find('[title="Edit"]')
-          .click();    // <- click the edit icon on the row
+          .click(); // <- click the edit icon on the row
         // fill out the box with a new person:
         cy.get('#firstName').clear().type('Max');
         cy.get('#lastName').clear().type('Mustermann');
@@ -113,48 +114,48 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
     cy.get('#addNewRecordButton').click();
     // Instead of adding one by one in a hard coded way,
     // we call it from json file, which I created and named it as '{}user.json' and loop them;
-    cy.fixture('user').then((user) => { // Grab the json file from fixtures folder,
+    cy.fixture('user').then((user) => {
+      // Grab the json file from fixtures folder,
       //  Put the columns in an array first:
       const columnNames = Object.keys(user.user1); // <- Get 'user1'-object keys from fixtures folder and store them.
       const userData = Object.values(user.user1); // <-  "          "        values       "         "           "
       // Now create a loop:
       cy.wrap(columnNames).each((columnName, index1) => {
-        cy.log(columnName);      // firstName, lastName...
+        cy.log(columnName); // firstName, lastName...
         cy.log(userData[index1]); // (Array) Max, Mustermann ...
-      /* Now we go with each element with a loop:
+        /* Now we go with each element with a loop:
       Use String concatenation(backtick- ``) / use '$' and '{}' to insert variable */
-      cy.get(`#${columnName}`).type(`${userData[index1]}`) 
+        cy.get(`#${columnName}`).type(`${userData[index1]}`);
       });
       cy.get('#submit').click();
       // Assert that new records added:
       cy.get('.rt-tbody')
-      .contains('.rt-tr-group', userData[0])
-      .then((row) => { 
-        cy.wrap(userData).each((value,index) =>{
-          cy.wrap(row).find('.rt-td').eq(index).should('contain', value); 
-        });        
-      });
+        .contains('.rt-tr-group', userData[0])
+        .then((row) => {
+          cy.wrap(userData).each((value, index) => {
+            cy.wrap(row).find('.rt-td').eq(index).should('contain', value);
+          });
+        });
     });
   });
 
   it('Adding New Record with Better Approach2', () => {
-    cy.get('#addNewRecordButton').click(); 
+    cy.get('#addNewRecordButton').click();
     cy.fixture('user').then((user) => {
       const columnNames2 = Object.keys(user.user2);
       const userData2 = Object.values(user.user2);
-    cy.wrap(columnNames2).each((columnName2, index2) => {
-      cy.get(`#${columnName2}`).type(`${userData2[index2]}`)
-    }); 
-    cy.get('#submit').click();
-    // Assert that new records added:
-    cy.get('.rt-tbody')
-    .contains('.rt-tr-group', userData2[0])
-    .then((row) => { 
-      cy.wrap(userData2).each((value,index) =>{
-        cy.wrap(row).find('.rt-td').eq(index).should('contain', value); 
-      });        
+      cy.wrap(columnNames2).each((columnName2, index2) => {
+        cy.get(`#${columnName2}`).type(`${userData2[index2]}`);
+      });
+      cy.get('#submit').click();
+      // Assert that new records added:
+      cy.get('.rt-tbody')
+        .contains('.rt-tr-group', userData2[0])
+        .then((row) => {
+          cy.wrap(userData2).each((value, index) => {
+            cy.wrap(row).find('.rt-td').eq(index).should('contain', value);
+          });
+        });
     });
   });
-
-});
 });

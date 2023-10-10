@@ -26,5 +26,3 @@ Step3- The File that we want to upload, should be in our fixture folder(pic.png)
     });
   });
 });
-
-
