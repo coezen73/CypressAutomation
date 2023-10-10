@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 /*
-   if we need to navigate another URL then our baseUrl, we can define it at this describe block
+   if we need to navigate another URL then our baseUrl, we can define it at this 'describe' block
    (which will affect all 'it' blocks), or in 'it' block
    (which will affect only related 'it' block):
     */
@@ -21,18 +21,17 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
 
   it('Finding And Editing a Record', () => {
     /* Locate table-body -> navigate through this element to find 'Alden Cantrell', 
-           -> update info with another person:  
+       -> update info with another person:  
            1. get me table body  
            2. get me the row that contains 'Alden'
            3. store it as Jquery element
            */
     cy.get('.rt-tbody') // <- class element (the whole table)
       .contains('.rt-tr-group', 'Alden') // <- parent to child element
-      .then((row) => {
-        // <- create a row element in Jquery
-        cy.wrap(row) // <- turn it to a cypress element
+      .then((row) => {  // <- create a row element in Jquery
+        cy.wrap(row)    // <- turn it to a cypress element
           .find('[title="Edit"]')
-          .click(); // <- click the edit icon on the row
+          .click();    // <- click the edit icon on the row
         // fill out the box with a new person:
         cy.get('#firstName').clear().type('Max');
         cy.get('#lastName').clear().type('Mustermann');
@@ -42,6 +41,7 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
         cy.get('#department').clear().type('QA');
         cy.get('#submit').click();
         // We are still inside the row element, we still need to do an Assertion:
+        cy.wrap(row).find('.rt-td').eq(0).should('contain', 'Max');
         cy.wrap(row).find('.rt-td').eq(1).should('contain', 'Mustermann');
       });
   });
@@ -59,7 +59,7 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
     cy.get('#searchBox').type('Alden');
     // Assert that there is no record
     cy.get('.rt-tbody').should('not.contain', 'Alden');
-    // No data found element is visible or not
+    // 'No rows found' element is visible or not
     cy.get('.rt-noData').should('contain', 'No rows found').should('be.visible');
   });
 
@@ -119,19 +119,19 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
       const userData = Object.values(user.user1); // <-  "          "        values       "         "           "
       // Now create a loop:
       cy.wrap(columnNames).each((columnName, index1) => {
-      // cy.log(columnName);      // firstName, lastName...
-      //  cy.log(userData[index]); // (Array) Max, Mustermann ...
+        cy.log(columnName);      // firstName, lastName...
+        cy.log(userData[index1]); // (Array) Max, Mustermann ...
       /* Now we go with each element with a loop:
       Use String concatenation(backtick- ``) / use '$' and '{}' to insert variable */
       cy.get(`#${columnName}`).type(`${userData[index1]}`) 
       });
       cy.get('#submit').click();
-      // Assert that new recoprds added:
+      // Assert that new records added:
       cy.get('.rt-tbody')
       .contains('.rt-tr-group', userData[0])
       .then((row) => { 
         cy.wrap(userData).each((value,index) =>{
-          cy.wrap(row).find('.rt-td').eq(index).should('contain', value); // Cypress assertion functions
+          cy.wrap(row).find('.rt-td').eq(index).should('contain', value); 
         });        
       });
     });
@@ -146,12 +146,12 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
       cy.get(`#${columnName2}`).type(`${userData2[index2]}`)
     }); 
     cy.get('#submit').click();
-    // Assert that new recoprds added:
+    // Assert that new records added:
     cy.get('.rt-tbody')
     .contains('.rt-tr-group', userData2[0])
     .then((row) => { 
       cy.wrap(userData2).each((value,index) =>{
-        cy.wrap(row).find('.rt-td').eq(index).should('contain', value); // Cypress assertion functions
+        cy.wrap(row).find('.rt-td').eq(index).should('contain', value); 
       });        
     });
   });
