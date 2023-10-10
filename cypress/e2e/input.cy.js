@@ -7,7 +7,7 @@ describe('Input Forms in Tests', () => {
     cy.visit('/registration_form');
   });
 
-  it.skip('Check different input box fields and verify', () => {
+  it('Check different input box fields and verify', () => {
     // fill the form:
     cy.get('input[name="firstname"]').type('Max');
     cy.get('input[name="lastname"]').type('Mustermann');
@@ -27,7 +27,7 @@ describe('Input Forms in Tests', () => {
 
     cy.get('input[name="birthday"]').type('01/01/2001');
   });
-  it.skip('Check different radio-button actions', () => {
+  it('Check different radio-button actions', () => {
     cy.get('.radio') // <- Locate all the buttons at once (.radio) from the class,
       .find('[type=radio]') // <- locate the button itself,
       .then(($myRadio) => {
@@ -45,7 +45,7 @@ describe('Input Forms in Tests', () => {
         cy.wrap($myRadio).eq(2).should('not.be.checked');
       });
   });
-  it.skip('Check different checkbox actions', () => {
+  it('Check different checkbox actions', () => {
     // Get all checkboxes and select JAVA:
     cy.get('[type="checkbox"]').then(($myCheckbox) => {
       cy.wrap($myCheckbox).eq(1).check().should('be.checked');
@@ -55,7 +55,7 @@ describe('Input Forms in Tests', () => {
       cy.wrap($myCheckbox).eq(2).should('have.value', 'javascript').check().should('be.checked');
     });
   });
-  it.skip('Check selection of a single choice from dropdown', () => {
+  it('Check selection of a single choice from dropdown', () => {
     // select one element:
     cy.get('select[name="job_title"]').select('QA'); // <- select 'class' and select 'function'
     // assert the text after selecting:

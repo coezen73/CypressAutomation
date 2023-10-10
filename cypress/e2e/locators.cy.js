@@ -50,7 +50,7 @@ describe('Find or Get Elements by Using Different Locators', () => {
       .click();
   });
 
-  it.only('Check different types of Assertions', () => {
+  it('Check different types of Assertions', () => {
     /* Cypress itself bundles(uses) assertions provided by Chai, Sinon and Jquery Libraries 
   
   - .should() assertion */
