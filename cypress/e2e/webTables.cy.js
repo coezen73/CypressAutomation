@@ -5,7 +5,7 @@
    (which will affect all 'it' blocks), or in 'it' block
    (which will affect only related 'it' block):
     */
-describe('Cypress Web Table Tests', { baseUrl: 'https://demoqa.com' }, () => {
+describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
   Cypress.on(
     'uncaught:exception',
     () =>
@@ -18,7 +18,8 @@ describe('Cypress Web Table Tests', { baseUrl: 'https://demoqa.com' }, () => {
     cy.clearCookies();
     cy.visit('/webtables');
   });
-  xit('Finding and editing a record', () => {
+
+  it('Finding And Editing a Record', () => {
     /* Locate table-body -> navigate through this element to find 'Alden Cantrell', 
            -> update info with another person:  
            1. get me table body  
@@ -44,7 +45,8 @@ describe('Cypress Web Table Tests', { baseUrl: 'https://demoqa.com' }, () => {
         cy.wrap(row).find('.rt-td').eq(1).should('contain', 'Mustermann');
       });
   });
-  it('Finding and deleting a record', () => {
+
+  it('Finding And Deleting a Record', () => {
     cy.get('.rt-tbody')
       .contains('.rt-tr-group', 'Alden')
       .then((row) => {
@@ -60,7 +62,8 @@ describe('Cypress Web Table Tests', { baseUrl: 'https://demoqa.com' }, () => {
     // No data found element is visible or not
     cy.get('.rt-noData').should('contain', 'No rows found').should('be.visible');
   });
-  it('Searching for different age records', () => {
+
+  it('Searching for Different Age Records', () => {
     // define age groups (create an array)
     const ageGroup = [29, 39, 45, 77]; // 3 positive scenario numbers, one negative (77)
     // for each age group, perform same test scenario: (DDT)
@@ -80,4 +83,78 @@ describe('Cypress Web Table Tests', { baseUrl: 'https://demoqa.com' }, () => {
       }
     });
   });
+
+  it('Adding New Record - BAD CODING Practice', () => {
+    cy.get('#addNewRecordButton').click();
+    // Fill out the form:
+    cy.get('#firstName').type('Max');
+    cy.get('#lastName').type('Mustermann');
+    cy.get('#userEmail').type('muster@mustermail.de');
+    cy.get('#age').type('40');
+    cy.get('#salary').type('7000');
+    cy.get('#department').type('QA');
+    cy.get('#submit').click();
+    // Assert that the new record is added:
+    cy.get('.rt-tbody')
+      .contains('.rt-tr-group', 'Mustermann')
+      .then((row) => {
+        // JS to cypress:
+        cy.wrap(row).find('.rt-td').eq(0).should('contain', 'Max'); // Cypress assertion functions
+        cy.wrap(row).find('.rt-td').eq(1).should('contain', 'Mustermann');
+        cy.wrap(row).find('.rt-td').eq(2).should('contain', '40');
+        cy.wrap(row).find('.rt-td').eq(3).should('contain', 'muster@mustermail.de');
+        cy.wrap(row).find('.rt-td').eq(4).should('contain', '7000');
+        cy.wrap(row).find('.rt-td').eq(5).should('contain', 'QA');
+      });
+  });
+
+  it('Adding New Record - BETTER APPROACH Practice', () => {
+    // click on add button:
+    cy.get('#addNewRecordButton').click();
+    // Instead of adding one by one in a hard coded way,
+    // we call it from json file, which I created and named it as '{}user.json' and loop them;
+    cy.fixture('user').then((user) => { // Grab the json file from fixtures folder,
+      //  Put the columns in an array first:
+      const columnNames = Object.keys(user.user1); // <- Get 'user1'-object keys from fixtures folder and store them.
+      const userData = Object.values(user.user1); // <-  "          "        values       "         "           "
+      // Now create a loop:
+      cy.wrap(columnNames).each((columnName, index1) => {
+      // cy.log(columnName);      // firstName, lastName...
+      //  cy.log(userData[index]); // (Array) Max, Mustermann ...
+      /* Now we go with each element with a loop:
+      Use String concatenation(backtick- ``) / use '$' and '{}' to insert variable */
+      cy.get(`#${columnName}`).type(`${userData[index1]}`) 
+      });
+      cy.get('#submit').click();
+      // Assert that new recoprds added:
+      cy.get('.rt-tbody')
+      .contains('.rt-tr-group', userData[0])
+      .then((row) => { 
+        cy.wrap(userData).each((value,index) =>{
+          cy.wrap(row).find('.rt-td').eq(index).should('contain', value); // Cypress assertion functions
+        });        
+      });
+    });
+  });
+
+  it('Adding New Record with Better Approach2', () => {
+    cy.get('#addNewRecordButton').click(); 
+    cy.fixture('user').then((user) => {
+      const columnNames2 = Object.keys(user.user2);
+      const userData2 = Object.values(user.user2);
+    cy.wrap(columnNames2).each((columnName2, index2) => {
+      cy.get(`#${columnName2}`).type(`${userData2[index2]}`)
+    }); 
+    cy.get('#submit').click();
+    // Assert that new recoprds added:
+    cy.get('.rt-tbody')
+    .contains('.rt-tr-group', userData2[0])
+    .then((row) => { 
+      cy.wrap(userData2).each((value,index) =>{
+        cy.wrap(row).find('.rt-td').eq(index).should('contain', value); // Cypress assertion functions
+      });        
+    });
+  });
+
+});
 });

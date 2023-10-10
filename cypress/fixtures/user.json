@@ -1,0 +1,18 @@
+{
+    "user1":{
+       "firstName":"Max",
+       "lastName": "Mustermann",
+       "age":"40",
+       "userEmail":"muster@mustermail.de",
+       "salary":"7000",
+       "department":"QA"
+    },
+    "user2":{
+        "firstName":"Cemil",
+        "lastName": "Muster",
+        "age":"50",
+        "userEmail":"cemil@mustermail.de",
+        "salary":"8000",
+        "department":"QA" 
+    }
+}

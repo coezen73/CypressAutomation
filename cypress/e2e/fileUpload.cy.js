@@ -22,7 +22,9 @@ Step3- The File that we want to upload, should be in our fixture folder(pic.png)
     // assert path message displayed:
     cy.get('#uploaded-files').then(() => {
       // <- I locate it, than I use this object to verify
-      cy.contains('pic.png').should();
+      cy.contains('pic.png').should('be.visible');
     });
   });
 });
+
+
