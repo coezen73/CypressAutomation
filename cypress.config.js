@@ -10,6 +10,7 @@ module.exports = defineConfig({
       generateUser:"/Account/v1/User",
       generateToken:"/Account/v1/GenerateToken",
       loginAPI:"/Account/v1/Login"
+
     },
     video:false,                       // <- if we want to record a video-> video:true,
     retries:1,                         // <- if we want to run our testcase 2 times retries:1

@@ -7,7 +7,7 @@
 class Auth {
   // our class will hold 2 functions:
   login(user_name, password) {
-    cy.get('[name="user_name"]').type(user_name);
+    cy.get('[name="username"]').type(user_name);
     cy.get('[name="password"]').type(password);
     cy.get('#wooden_spoon').click();
   }
@@ -19,7 +19,6 @@ class Auth {
 }
 // Create the object of this class first:
 const auth = new Auth();
-
 // Then export 'auth' object:
 module.exports = {
   auth,
