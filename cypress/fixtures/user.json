@@ -14,5 +14,11 @@
         "userEmail":"cemil@mustermail.de",
         "salary":"8000",
         "department":"QA" 
+    },
+     "user3":{
+        "username":"tomsmith",
+        "password":"SuperSecretPassword" 
+        }
+    
     }
-}
+
