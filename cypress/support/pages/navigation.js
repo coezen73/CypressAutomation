@@ -1,7 +1,7 @@
  // This time export directly :
  export class navigateTo{
     loginPage() {
-       cypress.visit(Cypress.env('login')); 
+       cypress.visit(Cypress.env('login')); //.env():Gets the parameters, inside the paranthesis
     }
  }
 
