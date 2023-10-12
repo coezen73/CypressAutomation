@@ -11,7 +11,7 @@ describe('Auth: Login user with different ways', () => {
     cy.clearAllCookies();
     navigateTo.loginPage(); // it is called from POM
   });
-  it.skip('Happy Path: Using POM FUNCTION', () => {
+  it.skip('Happy Path: By Using POM FUNCTION', () => {
     // auth.login('harcoded variables');  --> Not a good way. Instead:
     cy.fixture('user').then((user) => {
       auth.login(user.user3.username, user.user3.password);
@@ -21,7 +21,7 @@ describe('Auth: Login user with different ways', () => {
     auth.logout();
   });
 
-  it('Happy Path: Using POM LOCATORS', () => {
+  it('Happy Path: By Using POM LOCATORS', () => {
     cy.fixture('user').then((user) => {
       // Use LoginLocators object to call targeted objects(locators) in the 'auth.js file'
       LoginLocators.locators.userName.type(user.user3.username);
@@ -32,4 +32,11 @@ describe('Auth: Login user with different ways', () => {
     cy.textExists('You logged into a secure area!');
     auth.logout();
   });
+
+  it('Negative Test: Invalid User Credentials', () => {
+    auth.login('invalid123', 'invalid234');
+    // Verify error message by using custom function:
+    cy.textExists('Your username is invalid!'); 
+  });
+
 });

@@ -23,7 +23,7 @@ class Auth {
 
 /* Create another class here: 
 We can apply 'findBy' annotation of Selenium with Cypress to call the locators.
-The difference from Selenium is that we create functions here;  */
+The difference from Selenium is, we create functions here;  */
 
 class Locators {
   get userName() {
