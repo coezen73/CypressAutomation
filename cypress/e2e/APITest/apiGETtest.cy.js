@@ -23,7 +23,21 @@ describe('How to do API tests with cypress', () => {
         expect(response.body.books[1].title).to.equal('Learning JavaScript Design Patterns');
         // Verify the header 'connection':
         expect(response.headers.connection).to.equal('keep-alive');
-        });
+     
+        // Our books appear as a list.
+        const books  = response.body.books; 
+        books.forEach(kitap => {      // <- extracting the each kitap title
+          console.log(kitap.title);
+      }); 
+        // in order to verify books titles with our json file, 
+        // we need to call it from fixtures folder and create a loop for verification:
+        cy.fixture('bookTitles').then((expectedBookTitle) => {
+          for (let i = 0; i < 8; i++) {
+            expect(response.body.books[i].title).to.equal(expectedBookTitle[i]);
+            console.log(expectedBookTitle[i]);
+          }
+        });      
       });
     });
+});
   
