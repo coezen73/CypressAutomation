@@ -1,4 +1,4 @@
-// In order to call our 'object' from support/pages/auth.js:Direct object calling
+// In order to call our 'object' from support/pages/auth.js: Importing/Direct object calling
 import { auth } from '../../support/pages/auth';
 import { navigateTo } from '../../support/pages/navigation';
 
