@@ -7,9 +7,9 @@ describe('Button Actions', () => {
   });
 
   it('Check Different Button Actions', () => {
-    // Select button with a text:
+    // Select a button with text:
     cy.contains('Button 2').should('be.visible').click();
-    //    (locating)     -     (verifying)     -     (acting)
+    //    (locating)     -   (verifying)     -   (acting)
 
     /* TASK: Find element with 'class' attribute and create a list
              Then select 3rd element from the list   */
@@ -37,5 +37,6 @@ describe('Button Actions', () => {
         cy.contains('Clicked on button four!').should('be.visible');
       }
     });
+     // npx cypress run --headless -b chrome
   });
 });
