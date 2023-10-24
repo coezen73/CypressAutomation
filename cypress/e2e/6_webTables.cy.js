@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-
 /*
    if we need to navigate another URL then our baseUrl, we can define it at this 'describe' block
    (which will affect all 'it' blocks), or in 'it' block

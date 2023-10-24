@@ -58,7 +58,7 @@ describe('E2E - Test API integrated UI Test', () => {
         method: 'DELETE',
       // In order to delete, we need to provide some headers:
       // and also we need to have Authorization.
-      // We use token inside our header authoruzation
+      // We use token inside our header authorization
         headers: {
           authorization:`Bearer ${response.body.token}`
         },
