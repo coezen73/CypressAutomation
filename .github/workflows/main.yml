@@ -1,29 +1,39 @@
-name: Cypress Tests
+# Github reads this yml file syntax and creates chrome set up for schedule
+# and/or for every push:
 
+name: Cypress Tests
+# statement:
 on:
     schedule:
-        # schedule at 09:00 sunday
-        - cron: '0 09 * * mon' 
+        # schedule at 09:00 monday with 'cron expression(jenkins)'
+        - cron: '0 09 * * mon'    # <- every time at 9am, every week on monday (* * mon)
 
     push:
-        branches:
+        # and also it runs with every push in Github
+        branches: # we are giving the branch name(s) that we want to run our tests.
             - main  
             
 jobs:
     cypress-run:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-latest # <- it runs with the latest available version of ubuntu
+        # Github has already set up Docker container for free:
         container: cypress/browsers:node12.18.3-chrome87-ff82
         steps:
-            - name: checkout
-              uses: actions/checkout@v3
+            - name: Checkout    # <- we name it first (we can change with smth. else)
+              uses: actions/checkout@v3  # <- create a job.(with this container version 3 works)
 
             - name: Install Dependencies
+            # installs npm node modules
               run:  npm install
 
             - name: Cypress Run
-              uses: cypress-io/github-action@v4
+              uses: cypress-io/github-action@v4 # 
               with:
                 # since we have installed dependencies we set it as 'false'
+                # if we didn't install npm, we may say 'true' and install from here as well
                 install: false 
                 browser: chrome
-                spec: cypress/e2e/**/*
+                spec: cypress/e2e/**/*  # <- we run everything inside e2e folder
+
+# My set up runs the test cases with every push and once a week mondays at 09: am. 
+                
