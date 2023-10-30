@@ -157,4 +157,5 @@ describe('CYPRESS WEB-TABLES TESTS', { baseUrl: 'https://demoqa.com' }, () => {
         });
     });
   });
+  
 });
